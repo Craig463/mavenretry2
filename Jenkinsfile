@@ -30,6 +30,7 @@ pipeline{
 			}
 		}
 		stage('Build'){
+			agent{
 				docker{
 					image 'maven:3-alpine'
 				}
@@ -38,6 +39,7 @@ pipeline{
 			sh 'mvn clean install'
 			sh 'java -jar my-app-1.0-SNAPSHOT.jar'
 			sh 'copy my-app-1.0-SNAPSHOT.jar .'
+			}
 		}
 		stage('Docker'){
 			agent{
