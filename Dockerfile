@@ -20,7 +20,7 @@ USER root
 
 
 
-
+COPY target/my-app-1.0-SNAPSHOT.jar .
 
 RUN apt-get update
 

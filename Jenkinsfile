@@ -29,6 +29,16 @@ pipeline{
 				
 			}
 		}
+		stage('Build'){
+				docker{
+					image 'maven:3-alpine'
+				}
+		}
+		steps{
+			sh 'mvn clean install'
+			sh 'java -jar my-app-1.0-SNAPSHOT.jar'
+			sh 'copy my-app-1.0-SNAPSHOT.jar .'
+		}
 		stage('Docker'){
 			agent{
 				docker{
@@ -43,6 +53,7 @@ pipeline{
 			}
 		}
 		stage('Push'){
+			steps{
 			withCredentials([usernamePassword( credentialsId: 'docker-hub-credentials', usernameVariable: 'USER', passwordVariable: 'PASSWORD')]) {
 			def registry_url = "https://registry.hub.docker.com"
 			bat "docker login -u $USER -p $PASSWORD ${docker-hub-credentials}"
@@ -50,6 +61,7 @@ pipeline{
 			//push your image now
 			//bat "docker push username/folder:build"
 			bat "docker push in-jenkins-image:latest"
+					}	
 				}
 			}
 
