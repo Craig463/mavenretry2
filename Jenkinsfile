@@ -43,12 +43,5 @@ pipeline{
 			}
 		}
 	}
-	post{
-		success {
-			archiveArtifacts(artifacts: '**/target/*.jar', allowEmptyArchive: true)
-		}
-		failure {
-			echo 'Build Failed'
-		}
-	}
+	
 }
