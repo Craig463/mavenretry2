@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:lts
+FROM ubuntu:latest
 
 
 
