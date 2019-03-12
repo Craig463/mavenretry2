@@ -49,7 +49,7 @@ pipeline{
 			docker.withRegistry("http://${https://cloud.docker.com/repository/registry-1.docker.io/craig463/jenkinstodocker}", "docker-hub-credentials"){
 			//push your image now
 			//bat "docker push username/folder:build"
-			bat "docker push in-jenkins-image"
+			bat "docker push in-jenkins-image:latest"
 				}
 			}
 
