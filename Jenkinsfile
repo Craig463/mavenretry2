@@ -45,9 +45,9 @@ pipeline{
 		stage('Push'){
 			steps{
 			withCredentials([usernamePassword( credentialsId: 'docker-hub-credentials', usernameVariable: 'USER', passwordVariable: 'PASSWORD')]) {
-			def registry_url = "craig463/jenkinstodocker:v1.0"
-			bat "docker login -u $USER -p $PASSWORD ${craig463/jenkinstodocker}"
-			docker.withRegistry("http://${craig463/jenkinstodocker}", "docker-hub-credentials"){
+			def registry_url = "https://registry.hub.docker.com"
+			bat "docker login -u $USER -p $PASSWORD ${docker-hub-credentials}"
+			docker.withRegistry("docker-hub-credentials}", "docker-hub-credentials"){
 			//push your image now
 			//bat "docker push username/folder:build"
 			bat "docker push in-jenkins-image:latest"
